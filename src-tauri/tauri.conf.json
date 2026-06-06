@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tauri-apps/tauri/dev/crates/tauri-config-schema/schema.json",
+  "productName": "Pomodoro",
+  "version": "0.1.0",
+  "identifier": "com.pomodoro.desktop",
+  "build": {
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Pomodoro",
+        "url": "https://pomodoro.kirwitheli.date/",
+        "width": 420,
+        "height": 660,
+        "alwaysOnTop": true,
+        "resizable": true,
+        "decorations": true
+      }
+    ],
+    "security": {
+      "dangerousRemoteUrlAccess": [
+        {
+          "url": "https://pomodoro.kirwitheli.date/**",
+          "enableTauriAPI": false
+        },
+        {
+          "url": "https://*.cloudflareaccess.com/**",
+          "enableTauriAPI": false
+        },
+        {
+          "url": "https://challenges.cloudflare.com/**",
+          "enableTauriAPI": false
+        }
+      ]
+    }
+  }
+}
