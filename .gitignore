@@ -20,3 +20,7 @@ node_modules
 
 # prd folder
 prd/
+
+# Tauri build artifacts
+src-tauri/target/
+dist/

@@ -16,22 +16,6 @@
         "resizable": true,
         "decorations": true
       }
-    ],
-    "security": {
-      "dangerousRemoteUrlAccess": [
-        {
-          "url": "https://pomodoro.kirwitheli.date/**",
-          "enableTauriAPI": false
-        },
-        {
-          "url": "https://*.cloudflareaccess.com/**",
-          "enableTauriAPI": false
-        },
-        {
-          "url": "https://challenges.cloudflare.com/**",
-          "enableTauriAPI": false
-        }
-      ]
-    }
+    ]
   }
 }
