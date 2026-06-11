@@ -4,11 +4,14 @@ const MINI_SIZE = { width: 230, height: 110 };
 const FULL_SIZE = { width: 420, height: 660 };
 
 export function isTauri(): boolean {
-  return typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
+  return (
+    typeof window !== "undefined" &&
+    ("__TAURI_INTERNALS__" in window ||
+      window.location.hostname === "pomodoro.kirwitheli.date")
+  );
 }
 
 export async function enterMiniMode(): Promise<void> {
-  if (!isTauri()) return;
   const { getCurrentWindow, LogicalSize } = await import(
     "@tauri-apps/api/window"
   );
@@ -18,7 +21,6 @@ export async function enterMiniMode(): Promise<void> {
 }
 
 export async function exitMiniMode(): Promise<void> {
-  if (!isTauri()) return;
   const { getCurrentWindow, LogicalSize } = await import(
     "@tauri-apps/api/window"
   );
