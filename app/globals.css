@@ -134,6 +134,16 @@
   }
 }
 
+/* Mini mode (Tauri pinned window): let the transparent window show through. */
+html.mini,
+html.mini body {
+  background: transparent;
+}
+
+html.mini header {
+  display: none;
+}
+
 /* Slow, calm pulse for the focus breathing circle (~4s cycle). */
 @keyframes breathe-pulse {
   0%,

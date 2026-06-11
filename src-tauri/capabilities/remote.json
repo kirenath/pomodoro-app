@@ -1,8 +1,11 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "default",
-  "description": "Default capabilities for the main window",
+  "identifier": "remote-frontend",
+  "description": "Allow the deployed web app to control the window for mini mode",
   "windows": ["main"],
+  "remote": {
+    "urls": ["https://pomodoro.kirwitheli.date"]
+  },
   "permissions": [
     "core:default",
     "core:window:allow-set-size",

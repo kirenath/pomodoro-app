@@ -2,12 +2,17 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { Pin } from "lucide-react";
+
 import { BreathingCircle } from "@/components/timer/breathing-circle";
 import { Controls } from "@/components/timer/controls";
+import { MiniTimer } from "@/components/timer/mini-timer";
 import { TimerDisplay } from "@/components/timer/timer-display";
 import { useSettings } from "@/components/settings-provider";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
 import { usePomodoro } from "@/lib/pomodoro/use-pomodoro";
+import { enterMiniMode, exitMiniMode, isTauri } from "@/lib/tauri";
 import type { SessionKind } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +37,28 @@ export function PomodoroApp() {
 
   const [glow, setGlow] = useState(false);
   const glowTimeout = useRef<number | null>(null);
+
+  const [mini, setMini] = useState(false);
+  const [inTauri, setInTauri] = useState(false);
+
+  useEffect(() => {
+    setInTauri(isTauri());
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("mini", mini);
+    return () => document.documentElement.classList.remove("mini");
+  }, [mini]);
+
+  const enterMini = useCallback(() => {
+    setMini(true);
+    void enterMiniMode();
+  }, []);
+
+  const exitMini = useCallback(() => {
+    setMini(false);
+    void exitMiniMode();
+  }, []);
 
   const handleSessionCompleted = useCallback(() => {
     toast("又一段安静的时间，记下来了");
@@ -64,6 +91,19 @@ export function PomodoroApp() {
   const isFocus = phase === "focus";
   const dotCount = Math.max(1, settings.cyclesPerLongBreak);
 
+  if (mini) {
+    return (
+      <MiniTimer
+        remainingSec={remainingSec}
+        status={status}
+        onStart={start}
+        onPause={pause}
+        onResume={resume}
+        onExit={exitMini}
+      />
+    );
+  }
+
   return (
     <main
       className={cn(
@@ -71,6 +111,18 @@ export function PomodoroApp() {
         glow ? "bg-accent/40" : "bg-background",
       )}
     >
+      {inTauri && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-3 right-3 text-muted-foreground"
+          onClick={enterMini}
+          aria-label="进入迷你模式"
+        >
+          <Pin className="size-4" aria-hidden="true" />
+        </Button>
+      )}
+
       {/* Phase heading */}
       <div className="flex flex-col items-center gap-1 text-center">
         <span className="text-sm font-medium tracking-wide text-primary">

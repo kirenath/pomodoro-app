@@ -3,18 +3,20 @@
   "version": "0.1.0",
   "identifier": "com.pomodoro.desktop",
   "build": {
-    "frontendDist": "../dist"
+    "devUrl": "http://localhost:3000",
+    "frontendDist": "https://pomodoro.kirwitheli.date/"
   },
   "app": {
     "windows": [
       {
         "title": "Pomodoro",
-        "url": "https://pomodoro.kirwitheli.date/",
+        "url": "/",
         "width": 420,
         "height": 660,
         "alwaysOnTop": true,
         "resizable": true,
-        "decorations": true
+        "decorations": true,
+        "transparent": true
       }
     ]
   }
