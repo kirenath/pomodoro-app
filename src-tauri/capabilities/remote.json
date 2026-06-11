@@ -4,7 +4,7 @@
   "description": "Allow the deployed web app to control the window for mini mode",
   "windows": ["main"],
   "remote": {
-    "urls": ["https://pomodoro.kirwitheli.date"]
+    "urls": ["https://pomodoro.kirwitheli.date/*"]
   },
   "permissions": [
     "core:default",
